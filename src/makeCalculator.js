@@ -5,39 +5,41 @@
  */
 
 function makeCalculator() {
-  const resultObject = {
+  const calculator = {
     result: 0,
+    operate(callback, number) {
+      callback.call(this, number);
+
+      return this;
+    },
+    add(number) {
+      this.result += number;
+
+      return this;
+    },
+    subtract(number) {
+      this.result -= number;
+
+      return this;
+    },
+    multiply(number) {
+      this.result *= number;
+
+      return this;
+    },
+    divide(number) {
+      this.result /= number;
+
+      return this;
+    },
+    reset() {
+      this.result = 0;
+
+      return this;
+    },
   };
 
-  resultObject.operate = function operate(action, number) {
-    this.result = action(this.result, number);
-
-    return this;
-  };
-
-  resultObject.add = function add(operand1, operand2) {
-    return operand1 + operand2;
-  };
-
-  resultObject.subtract = function subtract(operand1, operand2) {
-    return operand1 - operand2;
-  };
-
-  resultObject.multiply = function multiply(operand1, operand2) {
-    return operand1 * operand2;
-  };
-
-  resultObject.divide = function divide(operand1, operand2) {
-    return operand1 / operand2;
-  };
-
-  resultObject.reset = function reset() {
-    this.result = 0;
-
-    return this;
-  };
-
-  return resultObject;
+  return calculator;
 }
 
 module.exports = makeCalculator;
